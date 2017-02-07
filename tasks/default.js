@@ -1,3 +1,4 @@
 import gulp from 'gulp';
+import runSequence from 'run-sequence';
 
-gulp.task('default', ['lint', 'spec']);
+gulp.task('default', done => runSequence('lint', 'spec', done));

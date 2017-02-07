@@ -1,12 +1,12 @@
 import '../spec_helper';
 
-describe('PaymentsApi', () => {
+describe('OrdersApi', () => {
   let subject;
   beforeEach(() => {
-    subject = require('../../orders/payments_api');
+    subject = require('../../shopping_cart/orders_api');
   });
 
-  describe('#chargeCard', () => {
+  describe('#processOrder', () => {
     describe('when it is successful', () => {
       const text = 'it works!';
       beforeEach(() => {
@@ -18,8 +18,8 @@ describe('PaymentsApi', () => {
         });
       });
 
-      it.async('makes an ajax call to /charge-card and returns text', async () => {
-        expect(await subject.chargeCard()).toBe(text);
+      it.async('makes an ajax call to /process-order and returns text', async () => {
+        expect(await subject.processOrder()).toBe(text);
       });
     });
 
@@ -30,8 +30,8 @@ describe('PaymentsApi', () => {
         spyOn(global, 'fetch').and.callFake(() => Promise.reject(error));
       });
 
-      it.async('makes an ajax call to /charge-card and returns text', async () => {
-        const err = await subject.chargeCard().catch(e => Promise.resolve(e));
+      it.async('makes an ajax call to /process-order and returns text', async () => {
+        const err = await subject.processOrder().catch(e => Promise.resolve(e));
         expect(err).toEqual(error);
       });
     });

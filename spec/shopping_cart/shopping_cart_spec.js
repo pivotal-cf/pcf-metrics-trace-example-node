@@ -1,12 +1,28 @@
 import '../spec_helper';
+import request from 'supertest';
+import {ConsoleRecorder, ExplicitContext, Tracer} from 'zipkin';
 
-describe('Orders', () => {
-  let shoppingCartApp, request, log;
+
+describe('ShoppingCart', () => {
+  const serviceName = 'shopping-cart';
+  let shoppingCartApp, log, tracer, ZipkinExpress;
 
   beforeEach(() => {
-    request = require('supertest');
     log = jasmine.createSpyObj('log', ['info']);
-    shoppingCartApp = require('../../shopping_cart/index')(log);
+
+    const ctxImpl = new ExplicitContext();
+    const recorder = new ConsoleRecorder(log.info.bind(log));
+    tracer = new Tracer({ctxImpl, recorder});
+
+    spyOn(tracer, 'setId').and.callThrough();
+    ZipkinExpress = require('zipkin-instrumentation-express');
+    spyOn(ZipkinExpress, 'expressMiddleware').and.callThrough();
+
+    shoppingCartApp = require('../../shopping_cart/shopping_cart')(serviceName, log, tracer);
+  });
+
+  it('adds the zipkin middleware', () => {
+    expect(ZipkinExpress.expressMiddleware).toHaveBeenCalledWith({serviceName, tracer});
   });
 
   describe('GET /checkout', () => {
@@ -35,13 +51,18 @@ describe('Orders', () => {
     });
 
     describe('when processOrder is successful', () => {
+      const traceId = 'some-trace-id';
+      const spanId = 'some-span-id';
       const text = 'it worked!';
       let response;
 
       beforeEach.async(async () => {
         spyOn(OrdersApi, 'processOrder');
         OrdersApi.processOrder.and.callFake(() => Promise.resolve(text));
-        response = await request(shoppingCartApp).get('/checkout');
+        response = await request(shoppingCartApp).get('/checkout').set({
+          'X-B3-TraceId': traceId,
+          'X-B3-SpanId': spanId
+        });
       });
 
       it('returns 200', () => {
@@ -54,6 +75,18 @@ describe('Orders', () => {
 
       it('logs something', () => {
         expect(log.info).toHaveBeenCalledWith('/checkout called');
+      });
+
+      it('sets the trace id, span id and parent id', () => {
+        expect(tracer.setId).toHaveBeenCalled();
+        const trace = tracer.setId.calls.all()[0].args[0];
+        expect(trace.traceId).toEqual(traceId);
+        expect(trace.spanId).toEqual(spanId);
+        expect(trace.parentId).toEqual(spanId);
+      });
+
+      it('makes a request to charge card with the tracer', () => {
+        expect(OrdersApi.processOrder).toHaveBeenCalledWith({tracer});
       });
     });
   });
