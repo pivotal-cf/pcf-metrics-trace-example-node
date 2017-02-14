@@ -3,6 +3,7 @@ import url from 'url';
 
 export default {
   processOrder() {
-    return fetchText(url.format({host: process.env.ORDERS_HOST, pathname: '/process-order'}));
+    const u = url.parse(process.env.ORDERS_HOST); 
+    return fetchText(url.format({...u, pathname: '/process-order'}));
   }
 }
