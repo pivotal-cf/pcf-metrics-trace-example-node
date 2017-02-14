@@ -4,6 +4,11 @@ describe('OrdersApi', () => {
   let subject;
   beforeEach(() => {
     subject = require('../../shopping_cart/orders_api');
+    process.env.ORDERS_HOST = 'http://example.com';
+  });
+  
+  afterEach(() => {
+    delete process.env.ORDERS_HOST;
   });
 
   describe('#processOrder', () => {
@@ -20,6 +25,7 @@ describe('OrdersApi', () => {
 
       it.async('makes an ajax call to /process-order and returns text', async () => {
         expect(await subject.processOrder()).toBe(text);
+        expect(global.fetch).toHaveBeenCalledWith('http://example.com/process-order', {});
       });
     });
 
