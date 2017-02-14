@@ -9,7 +9,8 @@
   "scripts": {
     "orders": "node orders/index.js",
     "payments": "node payments/index.js",
-    "shopping-cart": "node shopping_cart/index.js"
+    "shopping-cart": "node shopping_cart/index.js",
+    "test": "gulp"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

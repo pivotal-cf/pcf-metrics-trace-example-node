@@ -13,13 +13,13 @@ ORDERS_APP_NAME="orders-$SUFFIX"
 SHOPPING_CART_APP_NAME="shopping-cart-$SUFFIX"
 
 # payments
-cf push $PAYMENTS_APP_NAME -m 512M --no-manifest --no-start -b nodejs_buildpack -c "node payments/index.js"
+cf push $PAYMENTS_APP_NAME -m 512M --no-manifest --no-start -b nodejs_buildpack -c "npm run-script payments"
 cf set-env $PAYMENTS_APP_NAME NODE_ENV production
 cf start $PAYMENTS_APP_NAME
 
 # orders
 PAYMENTS_HOST=$(cf app $PAYMENTS_APP_NAME | grep urls | awk '{print $2}')
-cf push $ORDERS_APP_NAME -m 512M --no-manifest --no-start -b nodejs_buildpack -c "node orders/index.js"
+cf push $ORDERS_APP_NAME -m 512M --no-manifest --no-start -b nodejs_buildpack -c "npm run-script orders"
 
 cf set-env $ORDERS_APP_NAME PAYMENTS_HOST $PAYMENTS_HOST
 cf set-env $ORDERS_APP_NAME NODE_ENV production
@@ -27,7 +27,7 @@ cf start $ORDERS_APP_NAME
 
 # shopping cart
 ORDERS_HOST=$(cf app $ORDERS_APP_NAME | grep urls | awk '{print $2}')
-cf push $SHOPPING_CART_APP_NAME -m 512M --no-manifest --no-start -b nodejs_buildpack -c "node shopping_cart/index.js"
+cf push $SHOPPING_CART_APP_NAME -m 512M --no-manifest --no-start -b nodejs_buildpack -c "npm run-script shopping-cart"
 
 cf set-env $SHOPPING_CART_APP_NAME ORDERS_HOST $ORDERS_HOST
 cf set-env $SHOPPING_CART_APP_NAME NODE_ENV production
