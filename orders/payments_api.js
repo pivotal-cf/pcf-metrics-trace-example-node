@@ -3,7 +3,7 @@ import url from 'url';
 
 export default {
   chargeCard(options = {}) {
-    const u = url.parse(process.env.PAYMENTS_HOST);
+    const u = process.env.PAYMENTS_HOST ? {protocol: 'http', host: process.env.PAYMENTS_HOST, slashes: true} : '';
     return fetchText(url.format({...u, pathname: '/charge-card'}), options);
   }
 }

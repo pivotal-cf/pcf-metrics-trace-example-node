@@ -4,7 +4,7 @@ describe('OrdersApi', () => {
   let subject;
   beforeEach(() => {
     subject = require('../../shopping_cart/orders_api');
-    process.env.ORDERS_HOST = 'http://example.com';
+    process.env.ORDERS_HOST = 'example.com:8080';
   });
   
   afterEach(() => {
@@ -25,7 +25,13 @@ describe('OrdersApi', () => {
 
       it.async('makes an ajax call to /process-order and returns text', async () => {
         expect(await subject.processOrder()).toBe(text);
-        expect(global.fetch).toHaveBeenCalledWith('http://example.com/process-order', {});
+        expect(global.fetch).toHaveBeenCalledWith('http://example.com:8080/process-order', {});
+      });
+
+      it.async('makes an ajax call to /process-order without the hostname and protocol when ORDERS_HOST is not present', async () => {
+        delete process.env.ORDERS_HOST;
+        expect(await subject.processOrder()).toBe(text);
+        expect(global.fetch).toHaveBeenCalledWith('/process-order', {});
       });
     });
 

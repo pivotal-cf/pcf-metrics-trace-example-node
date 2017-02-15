@@ -3,7 +3,7 @@ import url from 'url';
 
 export default {
   processOrder() {
-    const u = url.parse(process.env.ORDERS_HOST); 
+    const u = process.env.ORDERS_HOST ? {protocol: 'http', host: process.env.ORDERS_HOST, slashes: true} : '';
     return fetchText(url.format({...u, pathname: '/process-order'}));
   }
 }

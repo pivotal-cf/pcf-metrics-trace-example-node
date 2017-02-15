@@ -3,7 +3,7 @@ import '../spec_helper';
 describe('PaymentsApi', () => {
   let subject;
   beforeEach(() => {
-    process.env.PAYMENTS_HOST = 'http://example.com';
+    process.env.PAYMENTS_HOST = 'example.com:8080';
     subject = require('../../orders/payments_api');
   });
 
@@ -25,7 +25,13 @@ describe('PaymentsApi', () => {
 
       it.async('makes an ajax call to /charge-card and returns text', async () => {
         expect(await subject.chargeCard()).toBe(text);
-        expect(global.fetch).toHaveBeenCalledWith('http://example.com/charge-card', {});
+        expect(global.fetch).toHaveBeenCalledWith('http://example.com:8080/charge-card', {});
+      });
+
+      it.async('makes an ajax call to /charge-card without the hostname and protocol when PAYMENTS_HOST is not present', async () => {
+        delete process.env.PAYMENTS_HOST;
+        expect(await subject.chargeCard()).toBe(text);
+        expect(global.fetch).toHaveBeenCalledWith('/charge-card', {});
       });
     });
 
