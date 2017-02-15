@@ -1,0 +1,3 @@
+payments: PORT=3000 npm run-script payments
+orders: PAYMENTS_HOST=localhost:3000 PORT=3001 npm run-script orders
+shopping-card: ORDERS_HOST=localhost:3001 PORT=3002 npm run-script shopping-cart

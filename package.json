@@ -10,6 +10,7 @@
     "orders": "node orders/index.js",
     "payments": "node payments/index.js",
     "shopping-cart": "node shopping_cart/index.js",
+    "start": "gulp foreman",
     "test": "gulp"
   },
   "devDependencies": {
@@ -19,6 +20,7 @@
     "babel-preset-stage-3": "^6.22.0",
     "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-jasmine": "^2.2.0",
+    "foreman": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-if": "^2.0.2",
@@ -26,6 +28,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-util": "^3.0.8",
     "jasmine-async-suite": "^0.0.7",
+    "npm": "^4.2.0",
     "require-dir": "^0.3.1",
     "run-sequence": "^1.2.2",
     "supertest": "^3.0.0"
