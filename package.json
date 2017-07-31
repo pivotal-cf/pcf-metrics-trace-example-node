@@ -25,12 +25,11 @@
     "gulp-plumber": "^1.1.0",
     "gulp-util": "^3.0.8",
     "jasmine-async-suite": "^0.0.7",
-    "require-dir": "^0.3.1",
+    "require-dir": "^0.3.2",
     "run-sequence": "^1.2.2",
     "supertest": "^3.0.0"
   },
   "dependencies": {
-    "npm": "^4.2.0",
     "babel-core": "^6.22.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-polyfill": "^6.22.0",
@@ -40,6 +39,7 @@
     "bunyan-blackhole": "^1.1.1",
     "express": "^4.14.1",
     "isomorphic-fetch": "^2.2.1",
+    "npm": "^4.2.0",
     "zipkin": "^0.5.1",
     "zipkin-instrumentation-express": "^0.5.1",
     "zipkin-instrumentation-fetch": "^0.5.1"
