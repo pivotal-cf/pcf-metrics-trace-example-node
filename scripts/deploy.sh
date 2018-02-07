@@ -11,6 +11,10 @@ if [ -z "$SUFFIX" ]; then echo "usage: SUFFIX=<APP_NAME_SUFFIX> ./deploy.sh" && 
 PAYMENTS_APP_NAME="payments-$SUFFIX"
 ORDERS_APP_NAME="orders-$SUFFIX"
 SHOPPING_CART_APP_NAME="shopping-cart-$SUFFIX"
+echo $SUFFIX
+echo $PAYMENTS_APP_NAME
+echo $ORDERS_APP_NAME
+echo $SHOPPING_CART_APP_NAME
 
 # payments
 cf push $PAYMENTS_APP_NAME -m 512M --no-manifest --no-start -b nodejs_buildpack -c "npm run-script payments"
