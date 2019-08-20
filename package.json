@@ -2,7 +2,7 @@
   "name": "pcf-metrics-trace-example-node",
   "version": "1.0.0",
   "engines": {
-    "node": "^6.9.0"
+    "node": "^8.0.0"
   },
   "repository": "git@github.com:pivotal-cf/pcf-metrics-trace-example-node.git",
   "license": "MIT",
@@ -14,34 +14,34 @@
     "test": "gulp"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
-    "eslint-plugin-babel": "^4.0.1",
-    "eslint-plugin-jasmine": "^2.2.0",
-    "foreman": "^2.0.0",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-if": "^2.0.2",
-    "gulp-jasmine": "^2.4.2",
-    "gulp-plumber": "^1.1.0",
-    "gulp-util": "^3.0.8",
-    "jasmine-async-suite": "^0.0.7",
-    "require-dir": "^0.3.2",
-    "run-sequence": "^1.2.2",
-    "supertest": "^3.0.0"
+    "babel-eslint": "latest",
+    "eslint-plugin-babel": "latest",
+    "eslint-plugin-jasmine": "latest",
+    "foreman": "latest",
+    "gulp": "latest",
+    "gulp-eslint": "latest",
+    "gulp-if": "latest",
+    "gulp-jasmine": "latest",
+    "gulp-plumber": "latest",
+    "gulp-util": "latest",
+    "jasmine-async-suite": "latest",
+    "require-dir": "latest",
+    "run-sequence": "latest",
+    "supertest": "latest"
   },
   "dependencies": {
-    "babel-core": "^6.22.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-polyfill": "^6.22.0",
-    "babel-preset-env": "^1.3.2",
-    "babel-preset-stage-3": "^6.22.0",
-    "bunyan": "^1.8.5",
-    "bunyan-blackhole": "^1.1.1",
-    "express": "^4.14.1",
-    "isomorphic-fetch": "^2.2.1",
-    "npm": "^4.2.0",
-    "zipkin": "^0.5.1",
-    "zipkin-instrumentation-express": "^0.5.1",
-    "zipkin-instrumentation-fetch": "^0.5.1"
+    "babel-core": "latest",
+    "babel-plugin-add-module-exports": "latest",
+    "babel-polyfill": "latest",
+    "babel-preset-env": "latest",
+    "babel-preset-stage-3": "latest",
+    "bunyan": "latest",
+    "bunyan-blackhole": "latest",
+    "express": "latest",
+    "isomorphic-fetch": "latest",
+    "npm": "latest",
+    "zipkin": "latest",
+    "zipkin-instrumentation-express": "latest",
+    "zipkin-instrumentation-fetch": "latest"
   }
 }
